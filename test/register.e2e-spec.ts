@@ -2,10 +2,12 @@ import request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { INestApplication } from '@nestjs/common';
+import process from 'process';
 
 describe('AuthController (e2e)', () => {
   let app: INestApplication;
-  const url = 'http://localhost:3000';
+  const appPort = process.env.APP_PORT || 3000;
+  const url = `http://localhost:${appPort}`;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({

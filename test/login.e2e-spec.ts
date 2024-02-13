@@ -2,11 +2,13 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
+import process from 'process';
 
 describe('AuthController (e2e)', () => {
   let app: INestApplication;
 
-  const url = 'http://localhost:3000';
+  const appPort = process.env.APP_PORT || 3000;
+  const url = `http://localhost:${appPort}`;
   const email = `test-${Date.now()}@example.com`;
   let password = '123456';
 

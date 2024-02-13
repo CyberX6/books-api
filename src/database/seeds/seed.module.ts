@@ -6,10 +6,12 @@ import databaseConfig from 'src/database/config/database.config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { TypeOrmConfigService } from '../typeorm-config.service';
 import { UserSeedModule } from './user/user-seed.module';
+import { BookSeedModule } from './book/book-seed.module';
 
 @Module({
   imports: [
     UserSeedModule,
+    BookSeedModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [databaseConfig, appConfig],

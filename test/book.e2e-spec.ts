@@ -2,11 +2,13 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
+import * as process from 'process';
 
 describe('Books (e2e)', () => {
   let app: INestApplication;
 
-  const url = 'http://localhost:3000';
+  const appPort = process.env.APP_PORT || 3000;
+  const url = `http://localhost:${appPort}`;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -85,7 +87,9 @@ describe('Books (e2e)', () => {
   });
 
   it('should retrieve a book by id', async () => {
-    const testBookId = 1;
+    const res = await request(url).get('/api/v1/books').expect(200);
+    const testBookId = res.body.data[0].id;
+
     const response = await request(url)
       .get(`/api/v1/books/${testBookId}`)
       .expect(200);
@@ -112,7 +116,9 @@ describe('Books (e2e)', () => {
   });
 
   it('should update a book with valid data', async () => {
-    const testBookId = 1;
+    const res = await request(url).get('/api/v1/books').expect(200);
+    const testBookId = res.body.data[0].id;
+
     const updatedTitle = 'Updated Book Title';
     const response = await request(url)
       .patch(`/api/v1/books/${testBookId}`)
@@ -134,7 +140,9 @@ describe('Books (e2e)', () => {
   });
 
   it('should return a 400 for invalid update data', async () => {
-    const testBookId = 1;
+    const res = await request(url).get('/api/v1/books').expect(200);
+    const testBookId = res.body.data[0].id;
+
     await request(url)
       .patch(`/api/v1/books/${testBookId}`)
       .send({ title: '' })
@@ -147,7 +155,9 @@ describe('Books (e2e)', () => {
   });
 
   it('should delete a book successfully', async () => {
-    const testBookId = 1;
+    const res = await request(url).get('/api/v1/books').expect(200);
+    const testBookId = res.body.data[0].id;
+
     await request(url).delete(`/api/v1/books/${testBookId}`).expect(200);
   });
 
