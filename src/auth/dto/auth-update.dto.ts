@@ -4,12 +4,12 @@ import { IsNotEmpty, IsOptional, MinLength } from 'class-validator';
 export class AuthUpdateDto {
   @ApiProperty({ example: 'John' })
   @IsOptional()
-  @IsNotEmpty({ message: 'First name is required' })
+  @IsNotEmpty({ message: 'First name can not be empty' })
   firstName?: string;
 
   @ApiProperty({ example: 'Doe' })
   @IsOptional()
-  @IsNotEmpty({ message: 'Last name is required' })
+  @IsNotEmpty({ message: 'Last name can not be empty' })
   lastName?: string;
 
   @ApiProperty()

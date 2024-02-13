@@ -32,7 +32,7 @@ export class AuthController {
   @SerializeOptions({
     groups: ['me'],
   })
-  @Post('/login')
+  @Post('login')
   @HttpCode(HttpStatus.OK)
   public login(
     @Body() loginDto: AuthEmailLoginDto,

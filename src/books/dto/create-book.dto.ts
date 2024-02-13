@@ -18,7 +18,7 @@ export class ContentDto {
 
 export class CreateBookDto {
   @ApiProperty({ type: String, example: 'Book Title' })
-  @IsNotEmpty({ message: 'Title is required.' })
+  @IsNotEmpty({ message: 'Title should not be empty.' })
   title: string;
 
   @ApiProperty({ type: Object, example: [{ id: 1, text: 'Page 1 Text' }] })
